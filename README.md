@@ -72,6 +72,40 @@ What all is this addon doing?
 * Hooks up a bunch of necessary `babel` transforms
 * Provides a decorator for creating a thin wrapper around your React components that bridge the gap between the two libraries
 
+Javascript Lint
+------------------------------------------------------------------------------
+
+By using this addon, it is likely that your `npm run lint:js` will fail. You will need to change your eslint configuration to add proper support for Class Decorators and JSX.
+
+Install additional eslint modules:
+
+```bash
+npm install babel-eslint eslint-plugin-babel eslint-plugin-react --save-dev
+```
+
+Change your `eslintrc.js` to add the following:
+
+```javascript
+  {
+    parser: "babel-eslint",
+    ...
+    parserOptions: {
+      ...,
+      ecmaFeatures: {
+        jsx: true,
+        legacyDecorators: true
+        ...
+      },
+    },
+    ...,
+    rules: {
+      'react/jsx-uses-react': 'error',
+      'react/jsx-uses-vars': 'error',
+      ...
+    },
+  }
+```
+
 Is this production ready?
 ------------------------------------------------------------------------------
 
